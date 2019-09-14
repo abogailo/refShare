@@ -7,5 +7,6 @@ end
 
 use Rack::MethodOverride
 use UsersController
-use ProjectsController
+use GroupsController
+use ContributionsController
 run ApplicationController

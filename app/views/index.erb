@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>RefStore</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+  </head>
+  <body id="page-top">
+    <h1>Reference Share!</h1>
+    <h3>Log In Here</h3>
+    <% if flash.has?(:message) %>
+      <p style="color:#f0ad4e;"><%= flash[:message] %> </p>
+    <% end %>
+    <form action="/login" method="POST">
+      <label for="username">Username:</label>
+        <input type="text" id="username" name="username"><br><br>
+      <label for="password">Password:</label>
+        <input type="text" id="password" name="password"><br><br>
+      <input type="submit" id="submit" value="Log In">      
+    
+    <h3>Not signed up yet?</h3>
+    <a href="/signup">Sign Up</a>
+    
+  </body>
+</html>

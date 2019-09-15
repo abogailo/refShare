@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
     include Slugifiable::InstanceMethod
     
     has_secure_password
-    has_many :follows, dependent: :destroy
     has_many :contributions, dependent: :destroy
     has_many :groups, through: :contributions
+    has_many :groups, through: :follows, dependent: :destroy
 end

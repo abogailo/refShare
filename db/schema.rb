@@ -11,53 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190914012506) do
+ActiveRecord::Schema.define(version: 20190915161428) do
 
   create_table "contributions", force: :cascade do |t|
     t.string   "title"
     t.string   "content"
-    t.datetime "created_at", null: false
     t.integer  "user_id"
+    t.integer  "group_id"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "contributions", ["user_id"], name: "index_contributions_on_user_id"
-
-  create_table "contributions_groups", force: :cascade do |t|
-    t.integer  "contribution_id"
-    t.integer  "group_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  add_index "contributions_groups", ["contribution_id"], name: "index_contributions_groups_on_contribution_id"
-  add_index "contributions_groups", ["group_id"], name: "index_contributions_groups_on_group_id"
-
   create_table "follows", force: :cascade do |t|
-    t.boolean  "following"
-    t.datetime "followed_at"
-    t.integer  "user_id"
-    t.integer  "group_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer "user_id"
+    t.integer "group_id"
   end
-
-  add_index "follows", ["group_id"], name: "index_follows_on_group_id"
-  add_index "follows", ["user_id"], name: "index_follows_on_user_id"
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
     t.integer  "user_id"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "groups", ["user_id"], name: "index_groups_on_user_id"
-
   create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "email"
-    t.string "password_digest"
+    t.string   "username"
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end

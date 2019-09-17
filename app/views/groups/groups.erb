@@ -1,3 +1,19 @@
 <h1> Welcome to Your Groups, <%= current_user.username.capitalize %> !</h1>
 
-    
+
+<% if !@groups.empty? %>
+
+<% @groups.each do |t| %>
+  <p><%= t.name %> <%= t.user_id%> <%= t.id%></p>
+  <% end %>
+
+<p> Your groups </p>
+
+<% else %>
+
+POO
+
+<% end %>
+
+
+

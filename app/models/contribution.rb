@@ -3,5 +3,5 @@ class Contribution < ActiveRecord::Base
     include Slugifiable::InstanceMethod
   
     belongs_to :user
-    has_many :groups
+    has_and_belongs_to_many :groups
   end

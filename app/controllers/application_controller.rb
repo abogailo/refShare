@@ -14,7 +14,7 @@ class ApplicationController < Sinatra::Base
 
     get '/' do
       if logged_in?
-          go_to_groups
+          redirect "/groups"
        else
           erb :index
        end

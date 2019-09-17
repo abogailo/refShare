@@ -3,7 +3,7 @@ class Group < ActiveRecord::Base
     include Slugifiable::InstanceMethod
     
     belongs_to :user
-    has_many  :contributions, :dependent => :destroy
+    has_and_belongs_to_many :contributions, :dependent => :destroy
     has_many :users, through: :follows
 
 end

@@ -3,8 +3,8 @@ class CreateContributions < ActiveRecord::Migration
     create_table :contributions do |t|
       t.string :title
       t.string :content
-      t.datetime :created_at
-      t.belongs_to :user, index: true, foreign_key: true
+      t.integer :user_id
+      t.integer :group_id
       t.timestamps null: false
     end
   end

@@ -5,11 +5,11 @@ class ContributionsController < ApplicationController
     
    #page to display all contributions, index action
   get '/contributions' do
-    #if logged_in?
-    #  erb :'contributions/contributions'
-   # else
+    if logged_in?
+      erb :'contributions/contributions'
+    else
       "Hello World"
-    #end
+    end
   end
 
     #creates a new contribution, new action

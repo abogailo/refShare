@@ -2,7 +2,7 @@ class GroupsController < ApplicationController
     #allows user to view all user groups while logged in, view action
   get '/groups' do
     if logged_in?
-      @groups = current_user.groups.all
+      @groups = Group.all
       erb :'groups/groups'
     else
       go_to_login
@@ -13,6 +13,7 @@ class GroupsController < ApplicationController
   get '/groups/:id' do
     if logged_in?
       @group = Group.find(params[:id])
+
       erb :'group/show_group'
     else
       go_to_groups

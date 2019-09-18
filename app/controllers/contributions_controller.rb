@@ -6,6 +6,7 @@ class ContributionsController < ApplicationController
    #page to display all contributions, index action
   get '/contributions' do
     if logged_in?
+      @contributions = current_user.contributions.all
       erb :'contributions/contributions'
     else
       "Hello World"

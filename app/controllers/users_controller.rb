@@ -2,7 +2,7 @@ class UsersController < ApplicationController
     #takes user to groups if logged in else redirects to login form
     get '/login' do
         if logged_in?
-          redirect "/groups"
+          redirect to '/groups'
         else
           go_to_home
         end
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     get '/logout' do
         if logged_in?
           session.destroy
-          go_to_home
+          redirect "/login"
         else
           go_to_home
         end

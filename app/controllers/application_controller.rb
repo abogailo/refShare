@@ -9,14 +9,14 @@ class ApplicationController < Sinatra::Base
         set :public_folder, 'public'
         set :views, 'app/views'
         enable :sessions
-        set :session_secret, "pretty_cool_right"
+        set :session_secret, "password_security"
     end
 
     get '/' do
       if logged_in?
-          redirect "/groups"
+          go_to_groups
        else
-          erb :index
+         go_to_contributions
        end
     end
 
@@ -26,7 +26,7 @@ class ApplicationController < Sinatra::Base
       end
 
       def current_user
-        @current_user ||= User.find(session[:user_id])
+       User.find(session[:user_id])
       end
 
       def go_to_home
@@ -34,7 +34,7 @@ class ApplicationController < Sinatra::Base
       end
 
       def go_to_groups
-        erb :'groups/groups'
+        redirect to '/groups'
       end
 
       def go_to_contributions

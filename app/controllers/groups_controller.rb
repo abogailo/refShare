@@ -5,7 +5,7 @@ class GroupsController < ApplicationController
       @groups = Group.all
       erb :'groups/groups'
     else
-      go_to_login
+      erb :'index'
     end
   end
 

@@ -2,7 +2,7 @@ class ContributionsController < ApplicationController
     #https://learn.co/tracks/full-stack-web-development-v7/sinatra/activerecord/sinatra-restful-routes
   #https://learn.co/tracks/full-stack-web-development-v7/sinatra/activerecord/sinatra-playlister
   #https://learn.co/tracks/full-stack-web-development-v7/sinatra/forms/layouts-and-yield
-    
+    require 'pry'
    #page to display all contributions, index action
   get '/contributions' do
     if logged_in?
@@ -16,7 +16,7 @@ class ContributionsController < ApplicationController
     #creates a new contribution, new action
   get '/contributions/new' do
     if logged_in?
-      erb :'/contributions/create_contribution'
+      erb :'/contributions/create_contributions'
     else
       go_to_login
     end
@@ -25,8 +25,8 @@ class ContributionsController < ApplicationController
    #displays one contribution based on ID in the url, show action
   get '/contributions/:id' do
     if logged_in?
-      @contribution = Contributions.find(params[:id])
-      erb :'contributions/show_contribution'
+      @contribution = Contribution.find(params[:id])
+      erb :'contributions/show_contributions'
     else
       go_to_login
     end
@@ -54,9 +54,9 @@ class ContributionsController < ApplicationController
       redirect to "/contributions/new"
     else
       @user = current_user
-      @group = @user.groups.find_or_create_by(name:params[:group_name])
+      @group= Group.find_or_create_by(name:params[:group_name], user_id:@user.id)
       @group.user_id = @user.id
-      @contribution = Contribution.create(name:params[:name], content:params[:content], group_id:@group.id, user_id:@user.id)
+      @contribution = Contribution.create(title:params[:name], content:params[:content], group_id:@group.id, user_id:@user.id) 
       redirect to "/contributions/#{@contribution.id}"
     end
   end

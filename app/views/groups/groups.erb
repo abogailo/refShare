@@ -4,7 +4,7 @@
 
 
 
-<% if @groups.empty? %>
+<% if !@groups.empty? %>
 
 <% @groups.each do |t| %>
   <p><%= t.name %> <%= t.user_id%> <%= t.id%></p>
@@ -17,3 +17,14 @@
 POO
 
 <% end %>
+
+
+<h1> Your Groups </h1>
+
+<% @groups.each do |t| %>
+  <% if t.user_id == current_user.id %>
+    <p><%= t.name %> <%= t.user_id%> <%= t.id%></p>
+  <% end %>
+<% end %>
+
+

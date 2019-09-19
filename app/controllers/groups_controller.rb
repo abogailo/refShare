@@ -9,6 +9,14 @@ class GroupsController < ApplicationController
     end
   end
 
+  get '/groups/new' do
+    if logged_in?
+      erb :'/groups/create_group'
+    else
+      go_to_login
+    end
+  end
+
   #displays a single group by group id, view action
   get '/groups/:id' do
     if logged_in?
@@ -49,19 +57,6 @@ class GroupsController < ApplicationController
     end
   end
 
-  #a user may partially edit a group as long as a name exists, edit action
-  patch '/groups/:id' do
-    if !params[:name].empty?
-      @group = Group.find(params[:id])
-      @group.update(name:params[:name])
-      flash[:message] = "Your group has been updated successfully."
-      go_to_groups
-    else
-      flash[:message] = "Please don't leave blank content."
-      redirect to "/groups/#{params[:id]}/edit"
-    end
-  end
-
   #creates a new group, create action
   post '/groups' do
     if params[:name].empty?
@@ -73,6 +68,8 @@ class GroupsController < ApplicationController
       go_to_groups
     end
   end
+
+  
 
   #deletes one group based on ID in the url, delete action
   delete '/groups/:id/delete' do

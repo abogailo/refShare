@@ -7,14 +7,18 @@
 <% if !@groups.empty? %>
 
 <% @groups.each do |t| %>
-  <p><%= t.name %> <%= t.user_id%> <%= t.id%></p>
+  <p><%= t.name %> <%= t.user_id%> <%= t.id%>:
+        <a href="/groups/<%= t.id %>/add">
+          <span class="glyphicon glyphicon-plus"></span></a> <a href="/groups/:id">
+          <span class="glyphicon glyphicon-eye-open"></span></a></p>
+          <br>
   <% end %>
 
 
 
 <% else %>
 
-POO
+Would you like to create a group? 
 
 <% end %>
 
@@ -23,7 +27,10 @@ POO
 
 <% @groups.each do |t| %>
   <% if t.user_id == current_user.id %>
- <div><a href="/groups/<%= t.id %>/edit"><span class="#"></span> Edit</div>
-    <div><%= t.name %> <%= t.user_id%> <%= t.id%></div>
+  <p><%= t.name %> <%= t.user_id%> <%= t.id%>:
+        <a href="/groups/<%= t.id %>/edit">
+          <span class="glyphicon glyphicon-edit"></span></a> <a href="/groups/<%= t.id %>/delete">
+          <span class="glyphicon glyphicon-remove"></span></a></p>
+          <br>
   <% end %>
 <% end %>

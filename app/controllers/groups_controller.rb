@@ -22,7 +22,17 @@ class GroupsController < ApplicationController
     if logged_in?
       @group = Group.find(params[:id])
 
-      erb :'group/show_group'
+      erb :'groups/show_group'
+    else
+      go_to_groups
+    end
+  end
+
+  get '/groups/:id/add' do
+    if logged_in?
+      @group = Group.find(params[:id])
+
+      erb :'groups/add_contribution'
     else
       go_to_groups
     end

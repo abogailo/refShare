@@ -10,7 +10,7 @@
   <p><%= t.name %> <%= t.user_id%> <%= t.id%></p>
   <% end %>
 
-<p> Your groups </p>
+
 
 <% else %>
 
@@ -23,8 +23,7 @@ POO
 
 <% @groups.each do |t| %>
   <% if t.user_id == current_user.id %>
-    <p><%= t.name %> <%= t.user_id%> <%= t.id%></p>
+ <div><a href="/groups/<%= t.id %>/edit"><span class="#"></span> Edit</div>
+    <div><%= t.name %> <%= t.user_id%> <%= t.id%></div>
   <% end %>
 <% end %>
-
-

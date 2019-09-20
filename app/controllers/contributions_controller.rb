@@ -54,8 +54,10 @@ class ContributionsController < ApplicationController
       redirect to "/contributions/new"
     else
       @user = current_user
-      @group= Group.find_or_create_by(name:params[:group_name], user_id:@user.id)
-      @group.user_id = @user.id
+      @group = Group.find_or_create_by(name:params[:group_name]) do |group|
+        group.user_id = current_user.id
+      end
+
       @contribution = Contribution.create(title:params[:name], content:params[:content], group_id:@group.id, user_id:@user.id) 
       redirect to "/contributions/#{@contribution.id}"
     end

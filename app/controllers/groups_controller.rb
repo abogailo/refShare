@@ -2,7 +2,8 @@ class GroupsController < ApplicationController
     #allows user to view all user groups while logged in, view action
   get '/groups' do
     if logged_in?
-      @groups = Group.all
+      @group = Group.all
+      @follow = Follow.all
       erb :'groups/groups'
     else
       erb :'index'
@@ -83,6 +84,27 @@ class GroupsController < ApplicationController
     end
   end
 
+  #when editing a follow
+  get '/groups/:id/_unfollow' do
+    if logged_in?
+      @group = Group.find(params[:id])
+      @follow = Follow.find_by(group_id: params[:id])
+        erb :'follows/unfollow'
+    else
+      go_to_login
+    end
+  end
+
+  get '/groups/:id/follow' do
+    if logged_in?
+      @group = Group.find(params[:id])
+      @follow = Follow.find_by(group_id: params[:id])
+        erb :'follows/follow'
+    else
+      go_to_login
+    end
+  end
+
   #creates a new group, create action
   post '/groups' do
     if params[:name].empty?
@@ -110,6 +132,28 @@ class GroupsController < ApplicationController
     end
   end
 
+  post '/groups/:id/follow' do
+    if logged_in?
+      @group = Group.find(params[:id])
+      @follow = Follow.create(group_id:@group.id, user_id:current_user.id)
+      go_to_groups
+    else
+      go_to_login
+    end
+  end
+
+  delete '/groups/:id/unfollow' do
+    if logged_in?
+        @follow = Follow.find(params[:id])
+        if @follow.user_id == current_user.id
+          @follow.destroy
+          flash[:message] = "Group has been unfollowed."
+          go_to_groups
+        end
+    else
+      go_to_login
+    end
+  end
 
   #deletes group, delete action
   delete '/groups/:id/delete' do

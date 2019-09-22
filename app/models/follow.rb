@@ -1,7 +1,6 @@
 class Follow < ActiveRecord::Base
-    extend Slugifiable::ClassMethod
-    include Slugifiable::InstanceMethod
-    
+    include Followable::InstanceMethods
+
     belongs_to :user
     belongs_to :group
 end

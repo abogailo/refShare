@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
-    extend Slugifiable::ClassMethod
-    include Slugifiable::InstanceMethod
     
+    include Followable::InstanceMethods
+
     has_secure_password
     has_many :contributions, dependent: :destroy
     has_many :groups, dependent: :destroy

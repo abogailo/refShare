@@ -1,0 +1,6 @@
+<h1> Unfollow? </h1>
+
+<form action="/groups/<%= @follow.id %>/unfollow" method="post">
+    <input type="hidden" id="hidden" name="_method" value="DELETE">
+    <button type="submit" class="btn btn-danger btn-sm">Unfollow</button>
+</form>

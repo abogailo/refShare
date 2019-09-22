@@ -41,6 +41,9 @@ class ApplicationController < Sinatra::Base
       def go_to_contributions
         erb :'contributions/contributions'
       end
-
+      
+      def follows?(group_id)
+        Follow.where(:user_id => current_user.id, :group_id => group_id).exists?
+      end
     end
 end

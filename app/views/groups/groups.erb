@@ -1,7 +1,14 @@
+<br>
+<br>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
 <h1> Welcome to Your Groups, <%= current_user.username.capitalize %> !</h1>
-
-
-
 
 
 <% if !@groups.empty? %>
@@ -9,7 +16,7 @@
 <% @groups.each do |t| %>
   <p><%= t.name %> <%= t.user_id%> <%= t.id%>:
         <a href="/groups/<%= t.id %>/add">
-          <span class="glyphicon glyphicon-plus"></span></a> <a href="/groups/:id">
+          <span class="glyphicon glyphicon-plus"></span></a> <a href="/groups/<%= t.id %>">
           <span class="glyphicon glyphicon-eye-open"></span></a></p>
           <br>
   <% end %>
@@ -29,8 +36,10 @@ Would you like to create a group?
   <% if t.user_id == current_user.id %>
   <p><%= t.name %> <%= t.user_id%> <%= t.id%>:
         <a href="/groups/<%= t.id %>/edit">
-          <span class="glyphicon glyphicon-edit"></span></a> <a href="/groups/<%= t.id %>/delete">
+          <span class="glyphicon glyphicon-edit"></span></a> 
+          <a href="/groups/<%= t.id %>/delete" >
           <span class="glyphicon glyphicon-remove"></span></a></p>
+          
           <br>
   <% end %>
 <% end %>

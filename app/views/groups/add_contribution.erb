@@ -1,1 +1,33 @@
-<h> heller adds contribution to group </h1>
+
+<br>
+<br>
+<br>
+<h1> Create Contributions </h1>
+<div class="form-bottom">
+<form  action="/groups/:id/add_contributions" method="post" >
+  <div class="form-contribution">
+    <label class="sr-only" for="form-description">Name</label>
+    <input type="text" name="name" placeholder="Contribution Name..." class="form-name form-control" id="form-name" >
+    <input type="text" name="content" placeholder="Contribution Content..." class="form-content form-control" id="form-content" >
+    <input type="hidden" id="form-group_name" name="group_name" value="<%= @group.name %>">
+  </div> 
+  <button type="submit" class="btn btn-success">Create</button>
+</form> 
+</div> 
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1> <%= @group.name %></h1>
+<br>
+<% @contribution.each do |t| %>
+    <% if t.group_id == @group.id %>
+    <p><h1><%= t.title %> </h1> </p>
+    <p> By user <%= t.user_id%> </p>
+    <p> <%= t.id%> </p>
+    <p> Content <%= t.content %> </p>
+
+   <% end %>
+<% end %>
+  

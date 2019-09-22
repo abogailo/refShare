@@ -6,10 +6,11 @@ class ContributionsController < ApplicationController
    #page to display all contributions, index action
   get '/contributions' do
     if logged_in?
+      @groups = Group.all
       @contributions = current_user.contributions.all
       erb :'contributions/contributions'
     else
-      "Hello World"
+      go_to_login
     end
   end
 
@@ -63,23 +64,20 @@ class ContributionsController < ApplicationController
     end
   end
 
-   #allows a user to edit a contribution that only they created, edit action maybe add flash to say you cant edit htis if its not the same user
-  patch '/contributions/:id' do
-    if !params[:name].empty? && !params[:content].empty? 
+   #edit contribution
+  patch '/contributions/:id' do 
+    if !params[:title].empty?
       @contribution = Contribution.find(params[:id])
-      @contribution.update(name:params[:name], content:params[:content])
-      @group = current_user.groups.find_by(name:params[:group_name])
-      @contribution.group_id = @group.id
-      @contribution.save
-      flash[:message] = "All set, contribution updated."
-      go_to_groups
+      @contribution.update(title:params[:title],content:params[:content])
+      flash[:message] = "All set, contribution updated!"
+      redirect to "/contributions/#{params[:id]}/edit"
     else
       flash[:message] = "Please, do not leave blank content."
       redirect to "/contributions/#{params[:id]}/edit"
     end
   end
 
-  #deletes one article based on id in the url, delete action
+  #deletes one contribution based on id in the url, delete action
   delete '/contributions/:id/delete' do
     if logged_in?
       @contribution = Contribution.find(params[:id])

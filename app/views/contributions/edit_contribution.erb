@@ -1,0 +1,23 @@
+<h1> Edit Contributions </h1>
+
+<h1> Edit Groups </h1>
+
+<form  action="/contributions/<%= @contribution.id%>" method="post" >
+<input id="hidden" type="hidden" name="_method" value="PATCH">
+
+<div class="form-contribution">
+  <label class="sr-only" for="form-description">Title</label>
+  <input type="text" name="title" class="form-title form-control" id="form-title" value= "<%= @contribution.title%>">
+  <input type="text" name="content" class="form-content form-control" id="form-content" value= "<%= @contribution.content%>">
+</div>
+
+
+  <button type="submit" class="btn btn-info">Update</button>
+</form>
+
+<h1> Delete Contribution? </h1>
+
+<form action="/contributions/<%= @contribution.id %>/delete" method="post">
+    <input type="hidden" id="hidden" name="_method" value="DELETE">
+    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+</form>

@@ -1,0 +1,21 @@
+<h1> Edit Account </h1>
+
+<form  action="/users/<%= current_user.id%>" method="post" >
+<input id="hidden" type="hidden" name="_method" value="PATCH">
+
+<div class="form-user">
+  <label class="sr-only" for="form-description">Account</label>
+  <input type="text" name="username" class="form-name form-control" id="form-username" value= "<%= current_user.username%>">
+  <input type="text" name="email" class="form-name form-control" id="form-email" value= "<%= current_user.email%>">
+  <input type="text" name="password" class="form-name form-control" id="form-password" value= "<%= current_user.password%>">
+</div>
+
+  <button type="submit" class="btn btn-info">Update</button>
+</form>
+
+<h1> Delete Account? </h1>
+
+<form action="/users/<%= current_user.id %>/delete" method="post">
+    <input type="hidden" id="hidden" name="_method" value="DELETE">
+    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+</form>

@@ -1,2 +1,18 @@
-<h1>  Contributions </h1>
-
+<br>
+<br>
+<br>
+<br>
+Your Contributions
+<% @groups.each do |y| %>
+    <% @contributions.each do |t| %>
+        
+        <% if y.id == t.group_id && t.user_id == current_user.id%>
+            <h1> <%= y.name %> </h1>
+            <p><%= t.title %> <%= t.content %> <%= t.user_id%> <%= t.id%>
+            <a href="/contributions/<%= t.id %>/edit">
+            <span class="glyphicon glyphicon-edit"></span></a> 
+            <a href="/contributions/<%= t.id %>/edit" >
+            <span class="glyphicon glyphicon-remove"></span></a></p>
+        <% end %>
+    <% end %>
+<% end %>

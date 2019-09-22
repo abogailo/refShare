@@ -1,2 +1,21 @@
   
 <h1> Edit Groups </h1>
+
+<form  action="/groups/<%= @group.id%>/edit" method="post" >
+<input id="hidden" type="hidden" name="_method" value="PATCH">
+
+<div class="form-group">
+  <label class="sr-only" for="form-description">Name</label>
+  <input type="text" name="name" class="form-name form-control" id="form-name" value= "<%= @group.name%>">
+</div>
+
+  <button type="submit" class="btn btn-info">Update</button>
+</form>
+
+<h1> Delete Group? </h1>
+
+<form action="/groups/<%= @group.id %>/delete" method="post">
+    <input type="hidden" id="hidden" name="_method" value="DELETE">
+    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+</form>
+ 

@@ -1,1 +1,15 @@
 <h1> show contributions </h1>
+
+<% @contributions.each do |t| %>
+    <% if t.user_id == current_user.id %>
+        <% if @groups.id == @t.group_id %>
+        <%= @groups.name %>
+        <%> end <%>
+    <p><%= t.name %> <%= t.user_id%> <%= t.id%>
+          <a href="/contributions/<%= t.id %>/edit">
+            <span class="glyphicon glyphicon-edit"></span></a> 
+            <a href="/contributions/<%= t.id %>/delete" >
+            <span class="glyphicon glyphicon-remove"></span></a></p>
+            
+            <br>
+    <% end %>

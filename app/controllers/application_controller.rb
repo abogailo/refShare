@@ -14,14 +14,14 @@ class ApplicationController < Sinatra::Base
 
     get '/' do
       if logged_in?
-          go_to_groups
+         go_to_groups
        else
          go_to_contributions
        end
     end
 
     helpers do
-      
+
       def logged_in?
         !!session[:user_id]
       end

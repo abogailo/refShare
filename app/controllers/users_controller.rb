@@ -29,6 +29,7 @@ class UsersController < ApplicationController
   
     get '/users/:id' do
         if logged_in?
+          @users = User.all
           erb :'users/show'
         else
           go_to_home

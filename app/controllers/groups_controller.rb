@@ -17,21 +17,22 @@ class GroupsController < ApplicationController
     end
   end
 
-  #displays a single group by group id, view action
+  #displays a single group by group id with all its contributions, view action
   get '/groups/:id' do
     if logged_in?
       @group = Group.find(params[:id])
-
+      @contribution = Contribution.all
       erb :'groups/show_group'
     else
       go_to_groups
     end
   end
 
+  # add a contribution through a group create action
   get '/groups/:id/add' do
     if logged_in?
       @group = Group.find(params[:id])
-
+      @contribution = Contribution.all
       erb :'groups/add_contribution'
     else
       go_to_groups
@@ -52,12 +53,27 @@ class GroupsController < ApplicationController
     end
   end
 
-  #edit contribution through user while user is logged in
+  #edit action
+
+  patch '/groups/:id' do
+    #do I need the logged in?
+    if !params[:name].empty?
+      @group = Group.find(params[:id])
+      @group.update(name:params[:name])
+      flash[:message] = "All set got yerself a new name!"
+      go_to_groups
+    else
+      flash[:message] = "Please don't leave blank content"
+      redirect to "/groups/#{params[:id]}/edit"
+    end
+  end
+
+   #when editing a group
   get '/groups/contributions/:id/edit' do
     if logged_in?
       @contribution = Contribution.find(params[:id])
       @group = Group.find(@contribution.group_id)
-      if @contribution.user_id == session[:user_id]
+      if @contribution.user_id == current_user.id
         erb :'contributions/edit_contributions'
       else
         go_to_groups
@@ -79,22 +95,31 @@ class GroupsController < ApplicationController
     end
   end
 
-  
+  post '/groups/:id/add_contributions' do
+    if params[:name].empty? || params[:content].empty? 
+      flash[:message] = "Must add content."
+      redirect to "/contributions/new" #need to figure out what to do here
+    else
+      @user = current_user
+      @group = Group.find(params[:id]) do |group|
+        group.user_id = current_user.id
+      end
 
-  #deletes one group based on ID in the url, delete action
+      @contribution = Contribution.create(title:params[:name], content:params[:content], group_id:@group.id, user_id:@user.id) 
+      redirect to "/groups/#{@group.id}"
+    end
+  end
+
+
+  #deletes group, delete action
   delete '/groups/:id/delete' do
     if logged_in?
-      if current_user.groups.size == 1
-        flash[:message] = "You need to enter at least one group."
-        go_to_groups
-      else
         @group = Group.find(params[:id])
         if @group.user_id == current_user.id
           @group.destroy
           flash[:message] = "Your group has been deleted successfully."
           go_to_groups
         end
-      end
     else
       go_to_login
     end

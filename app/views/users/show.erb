@@ -1,1 +1,33 @@
 <h1> Show Login </h1>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<h1> Lets Share, <%= current_user.username.capitalize %> !</h1>
+
+
+<% if !@users.empty? %>
+
+<% @users.each do |t| %>
+  <p><%= t.username %> <%= t.id%> <a href="/users/<%= t.id %>">
+    <span class="glyphicon glyphicon-eye-open"></span></a>
+    <a href="/follow/<%= t.id %>">
+    <span class="glyphicon glyphicon-star-empty"></span></a></p>
+    <br>
+  <% end %>
+
+<% else %>
+
+Youre all alone!!
+
+<% end %>
+
+
+<h1> Your Account </h1>
+
+<p><%= current_user.username %></p>
+<p><%= current_user.id %></p>

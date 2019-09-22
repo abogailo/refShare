@@ -27,7 +27,7 @@ class ContributionsController < ApplicationController
   get '/contributions/:id' do
     if logged_in?
       @contribution = Contribution.find(params[:id])
-      erb :'contributions/show_contributions'
+      erb :'contributions/show_contribution'
     else
       go_to_login
     end

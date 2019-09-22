@@ -33,7 +33,6 @@ class GroupsController < ApplicationController
   get '/groups/:id/add' do
     if logged_in?
       @group = Group.find(params[:id])
-      @contribution = Contribution.all
       erb :'groups/add_contribution'
     else
       go_to_groups
@@ -118,7 +117,7 @@ class GroupsController < ApplicationController
   end
 
   post '/groups/:id/add_contributions' do
-    if params[:name].empty? || params[:content].empty? 
+    if params[:title].empty? || params[:content].empty? 
       flash[:message] = "Must add content."
       redirect to "/contributions/new" #need to figure out what to do here
     else
@@ -127,8 +126,8 @@ class GroupsController < ApplicationController
         group.user_id = current_user.id
       end
 
-      @contribution = Contribution.create(title:params[:name], content:params[:content], group_id:@group.id, user_id:@user.id) 
-      redirect to "/groups/#{@group.id}"
+      @contribution = Contribution.create(title:params[:title], content:params[:content], group_id:params[:id], user_id:@user.id) 
+      go_to_groups
     end
   end
 

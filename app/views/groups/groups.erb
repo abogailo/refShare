@@ -1,15 +1,17 @@
-<br>
-<br>
+<h1 style="color: white; margin: 35px 10px;">Groups</h1>
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<h1> Welcome to Your RefShare, <%= current_user.username.capitalize %> !</h1>
+<div class="container" >
+    <div class="row">
 
-<h1> Welcome to Your Groups, <%= current_user.username.capitalize %> !</h1>
-
+      <div class="col-sm-8">
+        <div class="jumbotron" style="background: white; border-radius:10px; margin-top: 10px;">
+          <% if flash.has?(:message) %>
+          <div class="alert alert-success alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <p><%= flash[:message] %> </p>
+          </div>
+          <% end %>
 
 <% if !@group.empty? && @follow.empty?%>
     <% @group.each do |t| %>
@@ -57,10 +59,13 @@ Would you like to create a group?
   <p><%= t.name %> <%= t.user_id%> <%= t.id%>:
         <a href="/groups/<%= t.id %>/edit">
           <span class="glyphicon glyphicon-edit"></span></a> 
-          <a href="/groups/<%= t.id %>/delete" >
+          <a href="/groups/<%= t.id %>/edit" >
           <span class="glyphicon glyphicon-remove"></span></a></p>
-          
           <br>
   <% end %>
 <% end %>
 
+        </div><!--end jumbotron -->
+      </div><!--end col-sm-8 -->
+    </div><!-- end row -->
+  </div><!-- end container -->

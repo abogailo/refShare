@@ -1,6 +1,18 @@
-<h1> Unfollow? </h1>
+<h1 style="color: white; margin: 35px 10px;">Create Follow</h1>
+<div class="container" >
+  <div class="row">
 
-<form action="/groups/<%= @follow.id %>/unfollow" method="post">
-    <input type="hidden" id="hidden" name="_method" value="DELETE">
-    <button type="submit" class="btn btn-danger btn-sm">Unfollow</button>
-</form>
+    <div class="col-sm-4">
+
+      <div class="form-box">
+
+        <h1> Unfollow? </h1>
+
+        <form action="/groups/<%= @follow.id %>/unfollow" method="post">
+            <input type="hidden" id="hidden" name="_method" value="DELETE">
+            <button type="submit" class="btn btn-danger btn-sm">Unfollow</button>
+        </form>
+
+        </div> <!-- end col-sm-4-->
+    </div><!-- end row -->
+</div><!-- end container -->

@@ -16,7 +16,7 @@ class ApplicationController < Sinatra::Base
       if logged_in?
          go_to_groups
        else
-         go_to_contributions
+        erb :'index'
        end
     end
 

@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-    
-    include Followable::InstanceMethods
 
     has_secure_password
     has_many :contributions, dependent: :destroy

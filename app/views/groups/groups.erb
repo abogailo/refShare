@@ -15,7 +15,7 @@
 
 <% if !@group.empty? && @follow.empty?%>
     <% @group.each do |t| %>
-      <p><%= t.name %> <%= t.user_id%> <%= t.id%>:
+      <p><%= t.name %> :
         <a href="/groups/<%= t.id %>/add">
           <span class="glyphicon glyphicon-plus"></span></a> <a href="/groups/<%= t.id %>">
           <span class="glyphicon glyphicon-eye-open"></span></a>
@@ -30,7 +30,7 @@
 
 <% elsif !@follow.empty? && !@group.empty? %>
   <% @group.each do |t| %>
-    <p><%= t.name %> <%= t.user_id%> <%= t.id%>:
+    <p><%= t.name %> :
     <a href="/groups/<%= t.id %>/add">
     <span class="glyphicon glyphicon-plus"></span></a> <a href="/groups/<%= t.id %>">
     <span class="glyphicon glyphicon-eye-open"></span></a>

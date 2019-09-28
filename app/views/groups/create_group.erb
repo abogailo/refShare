@@ -1,12 +1,28 @@
 <h1 style="color: white; margin: 35px 10px;">Groups</h1>
+  <div class="container" >
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="jumbotron" style="background: white; border-radius:10px; margin-top: 10px;">
+          
+        <% if flash.has?(:message) %>
+           <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+               <p><%= flash[:message] %> </p>
+            </div>
+        <% end %>
 
-<h1> Lets create a New Group, Shall we? </h1>
-<div class="form-bottom">
-<form  action="/groups" method="post" >
-  <div class="form-group">
-    <label class="sr-only" for="form-description">Name</label>
-    <input type="text" name="name" placeholder="Group Name..." class="form-name form-control" id="form-name" >
-  </div> <!-- end form-group -->
-  <button type="submit" class="btn btn-success">Create</button>
-</form> 
-</div> 
+        <h1> Lets create a New Group, Shall we? </h1>
+        <div class="form-bottom">
+          <form  action="/groups" method="post" >
+            <div class="form-group">
+              <label class="sr-only" for="form-description">Name</label>
+              <input type="text" name="name" placeholder="Group Name..." class="form-name form-control" id="form-name" >
+            </div> <!-- end form-group -->
+            <button type="submit" class="btn btn-success">Create</button>
+          </form> 
+        </div> 
+
+      </div><!--end jumbotron -->
+    </div><!--end col-sm-8 -->
+  </div><!-- end row -->
+</div><!-- end container -->

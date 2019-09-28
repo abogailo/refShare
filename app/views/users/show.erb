@@ -1,30 +1,34 @@
-<h1> Show Login </h1>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<h1> Lets Share, <%= current_user.username.capitalize %> !</h1>
+<h1 style="color: white; margin: 35px 10px;">Groups</h1>
+  <div class="container" >
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="jumbotron" style="background: white; border-radius:10px; margin-top: 10px;">
 
 
-<% if !@users.empty? %>
 
-<% @users.each do |t| %>
-  <p><%= t.username %> <%= t.id%> <a href="/users/<%= t.id %>">
-    <span class="glyphicon glyphicon-eye-open"></span></a>
-  <% end %>
-
-<% else %>
-
-Youre all alone!!
-
-<% end %>
+        <h1><center><font size="4"> View Other RefShare Members, <%= current_user.username.capitalize %> !</font></center></h1>
 
 
-<h1> Your Account </h1>
+        <% if !@users.empty? %>
 
-<p><%= current_user.username %></p>
-<p><%= current_user.id %></p>
+        <% @users.each do |t| %>
+          <p><center><%= t.username.capitalize %> <%= t.id%> <a href="/users/<%= t.id %>">
+            <span class="glyphicon glyphicon-eye-open"></span></a></center></p>
+          <% end %>
+
+        <% else %>
+
+        Youre all alone!!
+
+        <% end %>
+
+
+        <h1><center><font size="4"> Your Account Info!</font></center></h1>
+
+        <p><center><%= current_user.username %> </center> </p>
+        <p><center><%= current_user.email %></center></p>
+        <p><center><a href="/users/<%= current_user.id %>/edit"> edit account information</span></a></center></p>
+        </div><!--end jumbotron -->
+      </div><!--end col-sm-8 -->
+    </div><!-- end row -->
+  </div><!-- end container -->

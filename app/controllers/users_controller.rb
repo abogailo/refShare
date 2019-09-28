@@ -69,8 +69,12 @@ class UsersController < ApplicationController
     end
   
     post '/signup' do
+        
         if params[:username].empty? || params[:email].empty? || params[:password].empty?
           flash[:message] = "Pleae don't leave blank content"
+          redirect to '/signup'
+        elsif User.where(:username.downcase => params[:username].downcase).exists?
+          flash[:message] = "Sorry, that username already exists!"
           redirect to '/signup'
         else
           @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
@@ -82,11 +86,10 @@ class UsersController < ApplicationController
   
     delete '/users/:id/delete' do
         if logged_in?
-          current_user.delete
+          current_user.destroy
           redirect to "/logout"
         else
           go_to_home
         end
     end
-    
 end

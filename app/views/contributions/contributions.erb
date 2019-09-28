@@ -1,15 +1,24 @@
-<h1 style="color: white; margin: 35px 10px;">Your Conributions</h1>
+<h1 style="color: white; margin: 35px 10px;">Groups</h1>
+  <div class="container" >
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="jumbotron" style="background: white; border-radius:10px; margin-top: 10px;">
+         
 
-<% @contributions.each do |t| %>
-    <% @groups.each do |y| %>
-        <% if y.id == t.group_id%>
-            <h1> <%= y.name %> </h1>
-            <p><%= t.title %> </p> <%= t.content %> <%= t.user_id%> <%= t.id%>
-        <a href="/contributions/<%= t.id %>/edit">
-            <span class="glyphicon glyphicon-edit"></span></a> 
-        <a href="/contributions/<%= t.id %>/edit" >
-            <span class="glyphicon glyphicon-remove"></span></a></p>
+        <% @contributions.each do |t| %>
+            <% @groups.each do |y| %>
+                <% if y.id == t.group_id%>
+                    <h1> <%= y.name %> </h1>
+                    <p><%= t.title %> </p> <%= t.content %> <%= t.user_id%> <%= t.id%>
+                <a href="/contributions/<%= t.id %>/edit">
+                    <span class="glyphicon glyphicon-edit"></span></a> 
+                <a href="/contributions/<%= t.id %>/edit" >
+                    <span class="glyphicon glyphicon-remove"></span></a></p>
+                <% end %>
+            <% end %> 
         <% end %>
-    <% end %>
-        
-<% end %>
+
+        </div><!--end jumbotron -->
+      </div><!--end col-sm-8 -->
+    </div><!-- end row -->
+  </div><!-- end container -->

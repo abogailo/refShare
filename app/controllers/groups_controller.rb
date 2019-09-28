@@ -3,6 +3,7 @@ class GroupsController < ApplicationController
   get '/groups' do
     if logged_in?
       @group = Group.all
+      @groups = current_user.groups.all
       @follow = Follow.all
       erb :'groups/groups'
     else
@@ -22,7 +23,6 @@ class GroupsController < ApplicationController
   get '/groups/:id' do
     if logged_in?
       @group = Group.find(params[:id])
-      @contribution = Contribution.all
       erb :'groups/show_group'
     else
       go_to_groups
@@ -32,6 +32,7 @@ class GroupsController < ApplicationController
   # add a contribution through a group create action
   get '/groups/:id/add' do
     if logged_in?
+      @user = current_user
       @group = Group.find(params[:id])
       erb :'groups/add_contribution'
     else
@@ -43,11 +44,11 @@ class GroupsController < ApplicationController
   get '/groups/:id/edit' do
     if logged_in?
       @group = Group.find(params[:id])
-      if @group.user_id == current_user.id
+     if @group.user_id == current_user.id
         erb :'groups/edit_group'
-      else
+     else
         go_to_groups
-      end
+     end
     else
       go_to_login
     end
@@ -55,16 +56,20 @@ class GroupsController < ApplicationController
 
   #edit action
 
-  patch '/groups/:id' do
+  patch '/groups/:id' do 
     #do I need the logged in?
-    if !params[:name].empty?
-      @group = Group.find(params[:id])
-      @group.update(name:params[:name])
-      flash[:message] = "All set got yerself a new name!"
-      go_to_groups
+    @group = Group.find(params[:id])
+    if @group.user_id == current_user.id
+        if !params[:name].empty?
+          @group.update(name:params[:name])
+          flash[:message] = "All set got yerself a new name!"
+          go_to_groups
+        else
+          flash[:message] = "Please don't leave blank content"
+          redirect to "/groups/#{params[:id]}/edit"
+        end
     else
-      flash[:message] = "Please don't leave blank content"
-      redirect to "/groups/#{params[:id]}/edit"
+      go_to_groups
     end
   end
 

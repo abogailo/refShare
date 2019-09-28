@@ -1,69 +1,58 @@
 <h1 style="color: white; margin: 35px 10px;">Groups</h1>
 
-<h1> Welcome to Your RefShare, <%= current_user.username.capitalize %> !</h1>
-<div class="container" >
+<h1><center><font size="3"> Welcome to Your RefShare, <%= current_user.username.capitalize %> !</font></center></h1>
+  <div class="container" >
     <div class="row">
-
       <div class="col-sm-8">
         <div class="jumbotron" style="background: white; border-radius:10px; margin-top: 10px;">
+          
           <% if flash.has?(:message) %>
-          <div class="alert alert-success alert-dismissible" role="alert">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <p><%= flash[:message] %> </p>
-          </div>
+           <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+               <p><%= flash[:message] %> </p>
+            </div>
           <% end %>
 
-<% if !@group.empty? && @follow.empty?%>
-    <% @group.each do |t| %>
-      <p><%= t.name %> :
-        <a href="/groups/<%= t.id %>/add">
-          <span class="glyphicon glyphicon-plus"></span></a> <a href="/groups/<%= t.id %>">
-          <span class="glyphicon glyphicon-eye-open"></span></a>
-          <% if t.user_id != current_user.id %>
-          <a href="/groups/<%= t.id %>/follow">
-            <span class="glyphicon glyphicon-star-empty"></span></a></p>
-          <% else %>
-          </p>
-          <% end %>
-         <br>
-  <% end %>
-
-<% elsif !@follow.empty? && !@group.empty? %>
-  <% @group.each do |t| %>
-    <p><%= t.name %> :
-    <a href="/groups/<%= t.id %>/add">
-    <span class="glyphicon glyphicon-plus"></span></a> <a href="/groups/<%= t.id %>">
-    <span class="glyphicon glyphicon-eye-open"></span></a>
-    <% if t.user_id != current_user.id %>
-    <% if follows?(t.id)%>
-      <a href="/groups/<%= t.id %>/_unfollow">
-        <span class="glyphicon glyphicon-star"></span></a></p>
-    <% else %>
-    <a href="/groups/<%= t.id %>/follow">
-    <span class="glyphicon glyphicon-star-empty"></span></a></p>
-      <% end %>
-      <% end %>
-  <% end %>
-<% else %>
-
-Would you like to create a group? 
-
-<% end %>
-
-
-
-<h1> Your Groups </h1>
-
-<% @group.each do |t| %>
-  <% if t.user_id == current_user.id %>
-  <p><%= t.name %> <%= t.user_id%> <%= t.id%>:
-        <a href="/groups/<%= t.id %>/edit">
-          <span class="glyphicon glyphicon-edit"></span></a> 
-          <a href="/groups/<%= t.id %>/edit" >
-          <span class="glyphicon glyphicon-remove"></span></a></p>
+        <% if !@group.empty? && @follow.empty?%>
+            <% @group.each do |t| %>
+              <p><%= t.name %> <font size="2">  <i> <%= t.user.username%> </i> </font>
+                <a href="/groups/<%= t.id %>/add"> <span class="glyphicon glyphicon-plus"></span></a> 
+                <a href="/groups/<%= t.id %>"> <span class="glyphicon glyphicon-eye-open"></span></a>
+                <% if t.user_id != current_user.id %>
+                  <a href="/groups/<%= t.id %>/follow"> <span class="glyphicon glyphicon-star-empty"></span></a></p>
+                <% else %>
+                  </p>
+                <% end %>
           <br>
-  <% end %>
-<% end %>
+        <% end %>
+
+        <% elsif !@follow.empty? && !@groups.empty? %>
+          <% @group.each do |t| %>
+            <p><%= t.name %> <font size="2">  <i> <%= t.user.username%> </i> </font> 
+            <a href="/groups/<%= t.id %>/add"> <span class="glyphicon glyphicon-plus"></span></a> 
+            <a href="/groups/<%= t.id %>"> <span class="glyphicon glyphicon-eye-open"></span></a>
+            <% if t.user_id != current_user.id %>
+              <% if follows?(t.id)%>
+                <a href="/groups/<%= t.id %>/_unfollow"><span class="glyphicon glyphicon-star"></span></a></p>
+              <% else %>
+                <a href="/groups/<%= t.id %>/follow"> <span class="glyphicon glyphicon-star-empty"></span></a></p>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% else %>
+
+        <div> <center> <font size="3"> Would you like to create a group? </font> </center></div>
+
+        <% end %>
+
+        <div> <h1> <center> <font size="3"> Your Groups </font> </center> </h1> </div>
+
+        <% @groups.each do |t| %>
+            <p> <%= t.name %>  <font size="2">  <i> <%= t.user.username%> </i> </font>
+            <a href="/groups/<%= t.id %>/edit"> <span class="glyphicon glyphicon-edit"></span></a> 
+            <a href="/groups/<%= t.id %>/edit" > <span class="glyphicon glyphicon-remove"></span></a></p>
+            <br>
+        <% end %>
 
         </div><!--end jumbotron -->
       </div><!--end col-sm-8 -->

@@ -1,23 +1,27 @@
 
 
-<br>
-<br>
+<h1 style="color: white; margin: 10px 5px;">Groups</h1>
+    <div class="container" >
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="jumbotron" style="background: white; border-radius:10px; margin-top: 10px;">
+            
+                <% if flash.has?(:message) %>
+                <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <p><%= flash[:message] %> </p>
+                    </div>
+                <% end %>
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<h1> <%= @group.name %></h1>
-<br>
-<% @contribution.each do |t| %>
-    <% if t.group_id == @group.id %>
-    <p><h1><%= t.title %> </h1> </p>
-    <p> By user <%= t.user_id%> </p>
-    <p> <%= t.id%> </p>
-    <p> Content <%= t.content %> </p>
-    
-   <% end %>
-<% end %>
+                <h1> <center><%= @group.name %></center></h1>
+                <% @group.contributions.each do |t| %>
+                    <p><font size="4"> <b> <%= t.title %> </b> </font></p>
+                    <p> <font size="2">  <i>created by <%= t.user.username%></i> </font></p>
+                    <p><center><%= t.content %> </center></p>
+                    <br>
+                <% end %>
+                
+        </div><!--end jumbotron -->
+      </div><!--end col-sm-8 -->
+    </div><!-- end row -->
+  </div><!-- end container -->

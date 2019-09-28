@@ -1,21 +1,30 @@
-<h1> Edit Account </h1>
+<h1 style="color: white; margin: 35px 10px;">Users</h1>
+  <div class="container" >
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="jumbotron" style="background: white; border-radius:10px; margin-top: 10px;">
+        <h1> Edit Account... </h1>
 
-<form  action="/users/<%= current_user.id%>" method="post" >
-<input id="hidden" type="hidden" name="_method" value="PATCH">
+        <form  action="/users/<%= current_user.id%>" method="post" >
+          <input id="hidden" type="hidden" name="_method" value="PATCH">
+          <div class="form-user">
+            <label class="sr-only" for="form-description">Account</label>
+            <input type="text" name="username" class="form-name form-control" id="form-username" value= "<%= current_user.username%>">
+            <input type="text" name="email" class="form-name form-control" id="form-email" value= "<%= current_user.email%>">
+            <input type="text" name="password" class="form-name form-control" id="form-password" value= "<%= current_user.password%>">
+          </div>
+          <br>
+          <button type="submit" class="btn btn-info">Update</button>
+        </form>
 
-<div class="form-user">
-  <label class="sr-only" for="form-description">Account</label>
-  <input type="text" name="username" class="form-name form-control" id="form-username" value= "<%= current_user.username%>">
-  <input type="text" name="email" class="form-name form-control" id="form-email" value= "<%= current_user.email%>">
-  <input type="text" name="password" class="form-name form-control" id="form-password" value= "<%= current_user.password%>">
-</div>
+        <h1> Delete Account? </h1>
 
-  <button type="submit" class="btn btn-info">Update</button>
-</form>
+        <form action="/users/<%= current_user.id %>/delete" method="post">
+          <input type="hidden" id="hidden" name="_method" value="DELETE">
+          <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+        </form>
 
-<h1> Delete Account? </h1>
-
-<form action="/users/<%= current_user.id %>/delete" method="post">
-    <input type="hidden" id="hidden" name="_method" value="DELETE">
-    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-</form>
+        </div><!--end jumbotron -->
+      </div><!--end col-sm-8 -->
+    </div><!-- end row -->
+  </div><!-- end container -->

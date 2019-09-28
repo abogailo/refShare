@@ -20,6 +20,7 @@ GEM
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
     daemons (1.3.1)
+    database_cleaner (1.7.0)
     eventmachine (1.2.7)
     ffi (1.11.1)
     i18n (0.9.5)
@@ -88,6 +89,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord (~> 4.2, >= 4.2.6)
   bcrypt
+  database_cleaner
   pry
   rack-flash3
   rake

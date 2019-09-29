@@ -13,8 +13,8 @@
             </div>
           <% end %>
 
-        <% if !@group.empty? && @follow.empty?%>
-            <% @group.each do |t| %>
+        <% if !@groups.empty? && @follows.empty?%>
+            <% @groups.each do |t| %>
               <p><%= t.name %> <font size="2">  <i> <%= t.user.username%> </i> </font>
                 <a href="/groups/<%= t.id %>/add"> <span class="glyphicon glyphicon-plus"></span></a> 
                 <a href="/groups/<%= t.id %>"> <span class="glyphicon glyphicon-eye-open"></span></a>
@@ -26,8 +26,8 @@
           <br>
         <% end %>
 
-        <% elsif !@follow.empty? && !@groups.empty? %>
-          <% @group.each do |t| %>
+        <% elsif !@follows.empty? && !@groups.empty? %>
+          <% @groups.each do |t| %>
             <p><%= t.name %> <font size="2">  <i> <%= t.user.username%> </i> </font> 
             <a href="/groups/<%= t.id %>/add"> <span class="glyphicon glyphicon-plus"></span></a> 
             <a href="/groups/<%= t.id %>"> <span class="glyphicon glyphicon-eye-open"></span></a>
@@ -47,13 +47,16 @@
 
         <div> <h1> <center> <font size="3"> Your Groups </font> </center> </h1> </div>
 
-        <% @groups.each do |t| %>
+        <% @user_groups.each do |t| %>
             <p> <%= t.name %>  <font size="2">  <i> <%= t.user.username%> </i> </font>
             <a href="/groups/<%= t.id %>/edit"> <span class="glyphicon glyphicon-edit"></span></a> 
             <a href="/groups/<%= t.id %>/edit" > <span class="glyphicon glyphicon-remove"></span></a></p>
             <br>
         <% end %>
 
+        <div> <h1> <center> <font size="3"> You Follow </font> </center> </h1> </div>
+        
+        
         </div><!--end jumbotron -->
       </div><!--end col-sm-8 -->
     </div><!-- end row -->

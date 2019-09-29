@@ -2,9 +2,9 @@ class GroupsController < ApplicationController
     #allows user to view all user groups while logged in, view action
   get '/groups' do
     if logged_in?
-      @group = Group.all
-      @groups = current_user.groups.all
-      @follow = Follow.all
+      @groups = Group.all
+      @user_groups = current_user.groups.all
+      @follows = Follow.all
       erb :'groups/groups'
     else
       erb :'index'

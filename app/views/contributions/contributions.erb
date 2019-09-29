@@ -4,18 +4,10 @@
       <div class="col-sm-8">
         <div class="jumbotron" style="background: white; border-radius:10px; margin-top: 10px;">
          
-
-        <% @contributions.each do |t| %>
-            <% @groups.each do |y| %>
-                <% if y.id == t.group_id%>
-                    <h1> <%= y.name %> </h1>
-                    <p><%= t.title %> </p> <%= t.content %> <%= t.user_id%> <%= t.id%>
-                <a href="/contributions/<%= t.id %>/edit">
-                    <span class="glyphicon glyphicon-edit"></span></a> 
-                <a href="/contributions/<%= t.id %>/edit" >
-                    <span class="glyphicon glyphicon-remove"></span></a></p>
-                <% end %>
-            <% end %> 
+        <% @user_contributions.each do |t| %>
+            <p> <b> <%= t.group.name %> </b> </p>
+            <p> &nbsp <%= t.title %> </p>
+            <p> <center> <%= t.content %> </center> </p>
         <% end %>
 
         </div><!--end jumbotron -->

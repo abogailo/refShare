@@ -4,7 +4,7 @@ class UsersController < ApplicationController
         if logged_in?
           redirect to '/groups'
         else
-          go_to_home
+          go_to_login
         end
     end
     
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
         if logged_in?
           erb :'users/edit_user'
         else
-          go_to_home
+          go_to_login
         end
     end
   
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
           @users = User.all
           erb :'users/show'
         else
-          go_to_home
+          go_to_login
         end
     end
   
@@ -41,18 +41,22 @@ class UsersController < ApplicationController
           session.destroy
           redirect "/login"
         else
-          go_to_home
+          go_to_login
         end
     end
   
     post '/login' do
         user = User.find_by(:username => params[:username])
         #https://learn.co/tracks/full-stack-web-development-v7/sinatra/activerecord/securing-passwords-in-sinatra
-        if user && user.authenticate(params[:password])
-          session[:user_id] = user.id
-          go_to_groups
-        else
-          go_to_home
+        if !logged_in?
+          go_to_login
+          if user && user.authenticate(params[:password])
+            session[:user_id] = user.id
+            go_to_groups
+          else
+            flash[:message] = "Those credentials do not match."
+            go_to_login
+          end
         end
     end  
   
@@ -89,7 +93,7 @@ class UsersController < ApplicationController
           current_user.destroy
           redirect to "/logout"
         else
-          go_to_home
+          go_to_login
         end
     end
 end

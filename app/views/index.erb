@@ -7,20 +7,29 @@
     <link rel="stylesheet" href="/css/styles.css">
   </head>
   <body id="page-top">
-    <h1>Reference Share!</h1>
-    <h3>Log In Here</h3>
-    <% if flash.has?(:message) %>
-      <p style="color:#f0ad4e;"><%= flash[:message] %> </p>
-    <% end %>
-    <form action="/login" method="POST">
-      <label for="username">Username:</label>
-        <input type="text" id="username" name="username"><br><br>
-      <label for="password">Password:</label>
-        <input type="text" id="password" name="password"><br><br>
-      <input type="submit" id="submit" value="Log In">      
+    <div class="container" >
+      <div class="row">
+         <div class="col-sm-8">
+            <div class="jumbotron" style="background: white; border-radius:10px; margin-top: 10px;">
+
+            <h1>RefShare!</h1>
+            <h3>Log In Here</h3>
+            <form action="/login" method="POST">
+                <% if flash.has?(:message) %>
+                <p style="color:#f0ad4e;"><%= flash[:message] %> </p>
+                <% end %>
+              <label for="username">Username:</label>
+              <input type="text" id="username" name="username"><br><br>
+              <label for="password">Password:</label>
+              <input type="text" id="password" name="password"><br><br>
+            <button type="submit" class="btn btn-info">Login</button>     
+            </form>
+            <h3>Not signed up yet?</h3>
+            <a href="/signup">Sign Up</a>
     
-    <h3>Not signed up yet?</h3>
-    <a href="/signup">Sign Up</a>
-    
+          </div><!--end jumbotron -->
+        </div><!--end col-sm-8 -->
+      </div><!-- end row -->
+    </div><!-- end container -->
   </body>
 </html>

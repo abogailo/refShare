@@ -7,14 +7,17 @@
         <div class="jumbotron" style="background: white; border-radius:10px; margin-top: 10px;">
           
 
-          <h3>Sign Up</h3>
+          <h1>Sign Up!</h1>
           <form action="/signup" method="POST">
             <% if flash.has?(:message) %>
             <p style="color:#f0ad4e;"><%= flash[:message] %> </p>
             <% end %>
-            <p><input type="text" autocomplete="off" name="username" placeholder="Username:"></p>
-            <p><input type="email" autocomplete="off" name="email" placeholder="Email:"></p>
-            <p><input type="password" autocomplete="off" name="password" placeholder="Password:"></p>
+            <p><label for="username">Username:</label>
+            <input type="text" autocomplete="off" name="username" placeholder="username..."></p>
+            <p><label for="email">Email:</label>
+            <input type="email" autocomplete="off" name="email" placeholder="email..."></p>
+            <p><label for="password">Password:</label>
+            <input type="password" autocomplete="off" name="password" placeholder="password..."></p>
             <button type="submit" class="btn btn-info">Submit</button>
           </form>
 

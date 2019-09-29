@@ -1,6 +1,6 @@
 <h1 style="color: white; margin: 35px 10px;">Groups</h1>
 
-<h1><center><font size="3"> Welcome to Your RefShare, <%= current_user.username.capitalize %> !</font></center></h1>
+<h1><center><font size="3"> Welcome to RefShare, <%= current_user.username.capitalize %> !</font></center></h1>
   <div class="container" >
     <div class="row">
       <div class="col-sm-8">
@@ -55,6 +55,13 @@
         <% end %>
 
         <div> <h1> <center> <font size="3"> You Follow </font> </center> </h1> </div>
+        <% @user_follows.each do |y| %>
+          <% @groups.each do |t| %>
+            <% if y.group_id == t.id%>
+              <p><%= t.name %></p>
+            <% end %>
+          <% end %>
+        <% end %>
         
         
         </div><!--end jumbotron -->

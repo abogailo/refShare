@@ -30,7 +30,7 @@ class ApplicationController < Sinatra::Base
        User.find(session[:user_id])
       end
 
-      def go_to_home
+      def go_to_login
         erb :'index'
       end
 

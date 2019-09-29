@@ -5,6 +5,7 @@ class GroupsController < ApplicationController
       @groups = Group.all
       @user_groups = current_user.groups.all
       @follows = Follow.all
+      @user_follows = current_user.follows.all
       erb :'groups/groups'
     else
       erb :'index'

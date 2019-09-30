@@ -45,5 +45,10 @@ class ApplicationController < Sinatra::Base
       def follows?(group_id)
         Follow.where(:user_id => current_user.id, :group_id => group_id).exists?
       end
+
+      def get_group(group_id)
+        @group = Group.find_by(:id => group_id)
+        @group.name
+      end
     end
 end

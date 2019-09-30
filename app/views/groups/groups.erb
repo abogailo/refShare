@@ -13,20 +13,7 @@
             </div>
           <% end %>
 
-        <% if !@groups.empty? && @follows.empty?%>
-            <% @groups.each do |t| %>
-              <p><%= t.name %> <font size="2">  <i> <%= t.user.username%> </i> </font>
-                <a href="/groups/<%= t.id %>/add"> <span class="glyphicon glyphicon-plus"></span></a> 
-                <a href="/groups/<%= t.id %>"> <span class="glyphicon glyphicon-eye-open"></span></a>
-                <% if t.user_id != current_user.id %>
-                  <a href="/groups/<%= t.id %>/follow"> <span class="glyphicon glyphicon-star-empty"></span></a></p>
-                <% else %>
-                  </p>
-                <% end %>
-          <br>
-        <% end %>
-
-        <% elsif !@follows.empty? && !@groups.empty? %>
+        <% if !@groups.empty? %>
           <% @groups.each do |t| %>
             <p><%= t.name %> <font size="2">  <i> <%= t.user.username%> </i> </font> 
             <a href="/groups/<%= t.id %>/add"> <span class="glyphicon glyphicon-plus"></span></a> 
@@ -55,12 +42,8 @@
         <% end %>
 
         <div> <h1> <center> <font size="3"> You Follow </font> </center> </h1> </div>
-        <% @user_follows.each do |y| %>
-          <% @groups.each do |t| %>
-            <% if y.group_id == t.id%>
-              <p><%= t.name %></p>
-            <% end %>
-          <% end %>
+        <% @user_follows.each do |t| %>
+          <p><%= get_group(t.group_id) %></p>
         <% end %>
         
         

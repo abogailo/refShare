@@ -61,7 +61,10 @@ class UsersController < ApplicationController
     end  
   
     patch '/users/:id' do
-        if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
+        if User.where(:username.downcase => params[:username].downcase).exists?
+          flash[:message] = "Sorry, that username already exists!"
+          redirect to '/users/:id/edit'
+        elsif !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
           @user = User.find(params[:id])
           @user.update(username:params[:username], email:params[:email], password:params[:password])
           flash[:message] = "Account Updated"

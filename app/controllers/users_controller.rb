@@ -46,18 +46,16 @@ class UsersController < ApplicationController
     end
   
     post '/login' do
-        user = User.find_by(:username => params[:username])
+      user = User.find_by(:username => params[:username])
         #https://learn.co/tracks/full-stack-web-development-v7/sinatra/activerecord/securing-passwords-in-sinatra
-        if !logged_in?
-          go_to_login
-          if user && user.authenticate(params[:password])
-            session[:user_id] = user.id
-            go_to_groups
-          else
-            flash[:message] = "Those credentials do not match."
-            go_to_login
-          end
-        end
+        
+      if user && user.authenticate(params[:password])
+        session[:user_id] = user.id
+        go_to_groups
+      else
+        flash[:message] = "Those credentials do not match."
+        go_to_login
+      end
     end  
   
     patch '/users/:id' do

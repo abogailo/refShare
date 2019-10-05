@@ -1,15 +1,11 @@
 class GroupsController < ApplicationController
     #allows user to view all user groups while logged in, view action
   get '/groups' do
-    if logged_in?
+    redirect_if_not_logged_in
       @groups = Group.all
-      @user_groups = current_user.groups.all
-      @follows = Follow.all
-      @user_follows = current_user.follows.all
+      @user_groups = current_user.groups
+      @user_follows = current_user.follows
       erb :'groups/groups'
-    else
-      erb :'index'
-    end
   end
 
   get '/groups/new' do
@@ -23,8 +19,12 @@ class GroupsController < ApplicationController
   #displays a single group by group id with all its contributions, view action
   get '/groups/:id' do
     if logged_in?
-      @group = Group.find(params[:id])
-      erb :'groups/show_group'
+      @group = Group.find_by_id(params[:id])
+      if @group
+        erb :'groups/show_group'
+      else
+        go_to_groups
+      end
     else
       go_to_groups
     end
@@ -43,22 +43,18 @@ class GroupsController < ApplicationController
 
   #allows user to edit a group if they created it, displays edit form based on ID in the url, edit action
   get '/groups/:id/edit' do
-    if logged_in?
+    redirect_if_not_logged_in
       @group = Group.find(params[:id])
      if @group.user_id == current_user.id
         erb :'groups/edit_group'
      else
         go_to_groups
      end
-    else
-      go_to_login
-    end
   end
 
   #edit action
 
   patch '/groups/:id' do 
-    #do I need the logged in?
     @group = Group.find(params[:id])
     if @group.user_id == current_user.id
         if !params[:name].empty?
@@ -93,7 +89,7 @@ class GroupsController < ApplicationController
   get '/groups/:id/_unfollow' do
     if logged_in?
       @group = Group.find(params[:id])
-      @follow = Follow.find_by(group_id: params[:id])
+      @follow = Follow.find_by(group_id: params[:id], user_id: current_user.id)
         erb :'follows/unfollow'
     else
       go_to_login
@@ -103,7 +99,7 @@ class GroupsController < ApplicationController
   get '/groups/:id/follow' do
     if logged_in?
       @group = Group.find(params[:id])
-      @follow = Follow.find_by(group_id: params[:id])
+      @follow = current_user.follows.find_by(group_id: params[:id])
         erb :'follows/follow'
     else
       go_to_login
@@ -148,7 +144,7 @@ class GroupsController < ApplicationController
   end
 
   delete '/groups/:id/unfollow' do
-    if logged_in?
+    if logged_in? 
         @follow = Follow.find(params[:id])
         if @follow.user_id == current_user.id
           @follow.destroy

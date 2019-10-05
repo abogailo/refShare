@@ -43,7 +43,7 @@
 
         <div> <h1> <center> <font size="3"> You Follow </font> </center> </h1> </div>
         <% @user_follows.each do |t| %>
-          <p><%= get_group(t.group_id) %></p>
+          <p><%= t.group.name %></p>
         <% end %>
         
         

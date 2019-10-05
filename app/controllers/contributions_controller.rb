@@ -6,7 +6,8 @@ class ContributionsController < ApplicationController
    #page to display all contributions, index action
   get '/contributions' do
     if logged_in?
-      @user_contributions = Contribution.joins(:group).where(user_id: current_user.id)
+      @user_contributions = current_user.contributions
+      #@user_contributions = Contribution.joins(:group).where(user_id: current_user.id)
       erb :'contributions/contributions'
     else
       go_to_login

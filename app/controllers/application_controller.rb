@@ -20,6 +20,7 @@ class ApplicationController < Sinatra::Base
        end
     end
 
+
     helpers do
 
       def logged_in?
@@ -31,7 +32,7 @@ class ApplicationController < Sinatra::Base
       end
 
       def go_to_login
-        erb :'index'
+        redirect to '/'
       end
 
       def go_to_groups
@@ -49,6 +50,12 @@ class ApplicationController < Sinatra::Base
       def get_group(group_id)
         @group = Group.find_by(:id => group_id)
         @group.name
+      end
+
+      def redirect_if_not_logged_in
+        if !logged_in?
+          go_to_login
+        end
       end
     end
 end
